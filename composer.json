@@ -1,0 +1,19 @@
+{
+    "name": "thio/instagram-watcher",
+    "description": "Watch instagram comment for spesific keyword",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Thio Van Agusti",
+            "email": "thiovan99@gmail.com"
+        }
+    ],
+    "require": {
+        "raiym/instagram-php-scraper": "^0.11.1",
+        "vlucas/phpdotenv": "^5.3",
+        "phpfastcache/phpfastcache": "^7.1",
+        "guzzlehttp/guzzle": "^7.3",
+        "irazasyed/telegram-bot-sdk": "^3.4",
+        "monolog/monolog": "^2.3"
+    }
+}
