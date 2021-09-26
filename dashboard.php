@@ -471,8 +471,7 @@
             processing: true,
             ajax: {
                 url: "api/table",
-                dataSrc: "",
-                cache: true
+                dataSrc: ""
             },
             order: [
                 [1, "desc"]

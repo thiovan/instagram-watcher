@@ -12,7 +12,7 @@ switch ($request) {
     case '/api/panel':
         require __DIR__ . '/api/get-panel.php';
         break;
-    case '/api/table':
+    case (preg_match('/\/api\/table.*/', $request) ? true : false):
         require __DIR__ . '/api/get-table.php';
         break;
     case '/api/category':
