@@ -439,6 +439,8 @@
             $('#btnSave').on('click', function() {
                 updateCategory();
             });
+
+            $('#modalUbah').modal('hide');
         }
 
         function updateCategory() {
@@ -455,7 +457,6 @@
                 `);
                 table.ajax.reload(initCompleteCallback);
                 fetchPanel();
-                $('#modalUbah').modal('hide');
                 toastr.success('Data berhasil disimpan.');
             }).fail(function (xhr) {
                 $('#btnSave').html(`
