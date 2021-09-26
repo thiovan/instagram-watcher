@@ -1,6 +1,3 @@
-order deny,allow
-deny from all
-
 RewriteEngine On
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
