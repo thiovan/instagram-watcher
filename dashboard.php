@@ -35,7 +35,7 @@
     </div> -->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-danger navbar-dark ">
+    <nav class="navbar navbar-expand-lg bg-danger navbar-dark animated slideInDown">
         <!-- Container wrapper -->
         <div class="container-fluid d-flex justify-content-center align-items-center">
 
@@ -59,7 +59,7 @@
             <div class="col-md-6 mb-4">
 
                 <!-- Card -->
-                <div class="card gradient-card">
+                <div class="card gradient-card animated slideInLeft slow">
 
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
@@ -102,7 +102,7 @@
             <div class="col-md-6 mb-4">
 
                 <!-- Card -->
-                <div class="card gradient-card">
+                <div class="card gradient-card animated slideInRight slow">
 
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
@@ -145,7 +145,7 @@
             <div class="col-md-6 mb-4">
 
                 <!-- Card -->
-                <div class="card gradient-card">
+                <div class="card gradient-card animated slideInLeft slow">
 
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
@@ -188,7 +188,7 @@
             <div class="col-md-6 mb-4">
 
                 <!-- Card -->
-                <div class="card gradient-card">
+                <div class="card gradient-card animated slideInRight slow">
 
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
@@ -230,7 +230,7 @@
         </div>
         <!--Grid row-->
 
-        <div class="card mb-4 mt-2">
+        <div class="card mb-4 mt-2 animated slideInUp slow delay-1s">
             <div class="card-header white-text aqua-gradient">
                 Tabel Data Aduan
             </div>
