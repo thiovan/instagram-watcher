@@ -1,32 +1,3 @@
-<?php
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/libs/rb-mysql.php';
-
-date_default_timezone_set('Asia/Jakarta');
-
-// init dot env
-$DOTENV = Dotenv\Dotenv::createImmutable(__DIR__);
-$DOTENV->load();
-
-// init DB
-R::setup(
-    'mysql:host=' . $_ENV['DATABASE_HOST'] . ';dbname=' . $_ENV['DATABASE_NAME'],
-    $_ENV['DATABASE_USER'],
-    $_ENV['DATABASE_PASS'],
-    TRUE
-);
-// R::fancyDebug(TRUE);
-
-$totalAduan = R::count('comments');
-$totalAduanBulanan = R::getCell("SELECT COUNT(*) AS total FROM `comments` WHERE MONTH(`created_at`) = MONTH(CURRENT_DATE())");
-$totalKeluhan = R::getCell("SELECT COUNT(*) AS total FROM `comments` WHERE `flag_id` = 1");
-$totalBukanKeluhan = R::getCell("SELECT COUNT(*) AS total FROM `comments` WHERE `flag_id` != 1 OR `flag_id` IS NULL");
-
-$aduans = R::getAll("SELECT c.`*`, f.label, f.color FROM `comments` c LEFT JOIN `flags` f ON c.flag_id=f.id");
-
-$kategoris = R::findAll("flags");
-?>
-
 <html lang="en">
 
 <head>
@@ -34,6 +5,7 @@ $kategoris = R::findAll("flags");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Instagram Lapor Hendi</title>
+    <link rel="shortcut icon" href="assets/images/logo-kota-semarang.png" type="image/x-icon">
 
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -46,7 +18,7 @@ $kategoris = R::findAll("flags");
 </head>
 
 <body>
-    <div id="mdb-preloader" class="flex-center">
+    <!-- <div id="mdb-preloader" class="flex-center">
         <div class="preloader-wrapper active">
             <div class="spinner-layer spinner-blue-only">
                 <div class="circle-clipper left">
@@ -60,7 +32,7 @@ $kategoris = R::findAll("flags");
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-danger navbar-dark ">
@@ -382,9 +354,9 @@ $kategoris = R::findAll("flags");
     <script src="assets/js/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
-        $(window).on('load', function() {
-            $('#mdb-preloader').delay(1000).fadeOut(300);
-        });
+        // $(window).on('load', function() {
+        //     $('#mdb-preloader').delay(1000).fadeOut(300);
+        // });
 
         toastr.options = {
             positionClass: 'md-toast-bottom-right'
