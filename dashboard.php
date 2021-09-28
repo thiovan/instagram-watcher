@@ -53,7 +53,7 @@
     <div class="container-fluid mt-4">
 
         <!--Grid row-->
-        <div class="row">
+        <div class="row smooth-scroll">
 
             <!--Grid column-->
             <div class="col-md-6 mb-4">
@@ -64,7 +64,7 @@
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
                         <!-- Content -->
-                        <a href="#!">
+                        <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask blue-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
                                     <h5 class="card-title">Total Aduan</h5>
@@ -107,7 +107,7 @@
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
                         <!-- Content -->
-                        <a href="#!">
+                        <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask purple-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
                                     <h5 class="card-title">Total Aduan Bulanan</h5>
@@ -150,7 +150,7 @@
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
                         <!-- Content -->
-                        <a href="#!">
+                        <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask peach-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
                                     <h5 class="card-title">Total Aduan Keluhan</h5>
@@ -193,7 +193,7 @@
                     <div class="card-image rounded" style="background-image: url(assets/images/study.jpg)">
 
                         <!-- Content -->
-                        <a href="#!">
+                        <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
                                     <h5 class="card-title">Total Aduan Lainnya</h5>
@@ -244,7 +244,6 @@
                                 <th>Postingan</th>
                                 <th>Kategori</th>
                                 <th>Isi Aduan</th>
-                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -289,57 +288,26 @@
                 </div>
 
                 <!-- Body -->
-                <div class="modal-body">
+                <div class="modal-body d-flex flex-column justify-content-between">
                     <div class="text-center">
                         <i class="fas fa-envelope-open-text fa-4x mb-3 animated rotateIn"></i>
                         <p id="isiAduan">
                             -
                         </p>
+                        <button id="btnCopy" type="button" class="btn btn-primary btn-rounded" data-clipboard-text="init" data-trigger="click" data-placement="bottom"><i class="far fa-copy mr-1"></i> Salin Teks</button>
+                    </div>
+
+                    <div>
+                        <select id="selectCategory" class="mt-5 mdb-select colorful-select dropdown-primary">
+                            <option value="">Tanpa Kategori</option>
+                        </select>
+                        <label class="mdb-main-label">Pilih Kategori Aduan</label>
                     </div>
                 </div>
 
                 <!-- Footer -->
-                <div class="modal-footer justify-content-center">
-                    <button id="btnCopy" type="button" class="btn btn-primary btn-block" data-clipboard-text="init" data-trigger="click" data-placement="bottom"><i class="far fa-copy mr-1"></i> Salin Teks</button>
-                </div>
-            </div>
-            <!-- Content -->
-        </div>
-    </div>
-    <!-- Full Height Modal Right -->
-
-    <!-- Full Height Modal Right -->
-    <div class="modal fade right" id="modalUbah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
-        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-            <!-- Content -->
-            <div class="modal-content">
-                <!-- Header -->
-                <div class="modal-header">
-                    <p class="heading lead">Ubah Kategori Aduan</p>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>
-                    </button>
-                </div>
-
-                <!-- Body -->
-                <div class="modal-body">
-                    <div class="text-center">
-                        <i class="fas fa-edit fa-4x mb-3 animated rotateIn"></i>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <select id="selectCategory" class="mdb-select md-form colorful-select dropdown-info">
-                                    <option value="">Tanpa Kategori</option>
-                                </select>
-                                <label class="mdb-main-label">Pilih Kategori Aduan</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="modal-footer justify-content-center">
-                    <button id="btnSave" type="button" class="btn btn-info btn-block"><i class="far fa-save mr-1"></i> Simpan</button>
+                <div class="modal-footer justify-content-center flex-column">
+                    <button id="btnSave" type="button" class="btn btn-primary btn-block"><i class="far fa-save mr-1"></i> Simpan</button>
                 </div>
             </div>
             <!-- Content -->
@@ -420,27 +388,21 @@
 
         var drawCallback = function() {
             $('.btn-lihat-aduan').unbind('click');
-            $('.btn-ubah-kategorin').unbind('click');
             $('#btnSave').unbind('click');
 
             $('.btn-lihat-aduan').on('click', function() {
                 var data = table.row($(this).parents('tr')).data();
+                $('#btnSave').data('id', data.id);
                 $('#isiAduan').text(data.text);
                 $('#btnCopy').attr('data-clipboard-text', data.text);
                 $('#modalIsiAduan').modal('show');
-            });
-
-            $('.btn-ubah-kategori').on('click', function() {
-                var data = table.row($(this).parents('tr')).data();
-                $('#btnSave').data('id', data.id);
-                $('#modalUbah').modal('show');
             });
 
             $('#btnSave').on('click', function() {
                 updateCategory();
             });
 
-            $('#modalUbah').modal('hide');
+            $('#modalIsiAduan').modal('hide');
         }
 
         function updateCategory() {
@@ -510,13 +472,6 @@
                     render: function(data, type, row, meta) {
                         return `
                             <button class="btn btn-primary btn-sm btn-lihat-aduan" style="margin-top: -5px; margin-bottom: 0;"><i class="fas fa-eye mr-1"></i> Lihat</button>
-                        `;
-                    }
-                },
-                {
-                    render: function(data, type, row, meta) {
-                        return `
-                            <button class="btn btn-info btn-sm btn-ubah-kategori" style="margin-top: -5px; margin-bottom: 0;"><i class="fas fa-edit mr-1"></i> Ubah</button>
                         `;
                     }
                 }
