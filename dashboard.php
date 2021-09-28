@@ -418,7 +418,7 @@
             }, 3000);
         }
 
-        var initCompleteCallback = function() {
+        var drawCallback = function() {
             $('.btn-lihat-aduan').unbind('click');
             $('.btn-ubah-kategorin').unbind('click');
             $('#btnSave').unbind('click');
@@ -455,10 +455,10 @@
                 $('#btnSave').html(`
                     <i class="far fa-save mr-1"></i> Simpan
                 `);
-                table.ajax.reload(initCompleteCallback);
+                table.ajax.reload(drawCallback, false);
                 fetchPanel();
                 toastr.success('Data berhasil disimpan.');
-            }).fail(function (xhr) {
+            }).fail(function(xhr) {
                 $('#btnSave').html(`
                     <i class="far fa-save mr-1"></i> Simpan
                 `);
@@ -521,7 +521,7 @@
                     }
                 }
             ],
-            initComplete: initCompleteCallback
+            drawCallback: drawCallback
         });
     </script>
 </body>
