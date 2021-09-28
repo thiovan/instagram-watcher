@@ -451,7 +451,7 @@
                 {
                     render: function(data, type, row, meta) {
                         return `
-                            <a href="${row.url}" target="_blank">${row.url}</a>
+                            <a href="${row.url}" target="_blank" role="button" class="btn btn-info btn-sm" style="margin-top: -5px; margin-bottom: 0;"><i class="fas fa-external-link-alt mr-1"></i> Postingan</a>
                         `;
                     }
                 },
