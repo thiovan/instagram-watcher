@@ -234,7 +234,7 @@
             <div class="card-header white-text aqua-gradient">
                 Grafik Data Aduan
             </div>
-            <div class="card-body px-4 mb-3">
+            <div class="card-body px-0 px-md-4 mb-3">
                 <!-- <div class="row px-4">
                     <div class="col-6">
                         <div class="md-form">
