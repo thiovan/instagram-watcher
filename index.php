@@ -15,6 +15,9 @@ switch ($request) {
     case (preg_match('/\/api\/table.*/', $request) ? true : false):
         require __DIR__ . '/api/get-table.php';
         break;
+    case (preg_match('/\/api\/chart.*/', $request) ? true : false):
+        require __DIR__ . '/api/get-chart.php';
+        break;
     case '/api/category':
         require __DIR__ . '/api/get-category.php';
         break;

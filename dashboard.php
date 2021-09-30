@@ -230,7 +230,31 @@
         </div>
         <!--Grid row-->
 
-        <div class="card mb-4 mt-2 animated slideInUp slow delay-1s">
+        <div class="card mb-4 mt-2 animated slideInUp slow">
+            <div class="card-header white-text aqua-gradient">
+                Grafik Data Aduan
+            </div>
+            <div class="card-body px-4 mb-3">
+                <!-- <div class="row px-4">
+                    <div class="col-6">
+                        <div class="md-form">
+                            <input placeholder="Pilih tanggal" type="text" id="startDateChart" class="form-control datepicker">
+                            <label for="date-picker-example">Tanggal Awal</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="md-form">
+                            <input placeholder="Pilih tanggal" type="text" id="endDateChart" class="form-control datepicker">
+                            <label for="date-picker-example">Tanggal Awal</label>
+                        </div>
+                    </div>
+                </div> -->
+
+                <canvas class="chart" id="grafikAduan" style="height: 250px;"></canvas>
+            </div>
+        </div>
+
+        <div class="card mb-4 mt-2 animated slideInUp slow">
             <div class="card-header white-text aqua-gradient">
                 Tabel Data Aduan
             </div>
@@ -330,10 +354,24 @@
             positionClass: 'md-toast-bottom-right'
         };
 
+        $('.datepicker').pickadate({
+            container: 'body',
+            monthsFull: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            weekdaysFull: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+            weekdaysShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+            today: 'hari ini',
+            clear: 'hapus',
+            firstDay: 1,
+            format: 'd mmmm yyyy',
+            formatSubmit: 'yyyy/mm/dd'
+        });
+
         $(document).ready(function() {
             $('.mdb-select').materialSelect();
 
             fetchPanel();
+            fetchChart();
             fetchCategory();
         });
 
@@ -344,7 +382,7 @@
                     $('#panelTotalAduanBulanan').html(data.total.bulanan);
                     $('#panelTotalAduanKeluhan').html(data.total.keluhan);
                     $('#panelTotalAduanLainnya').html(data.total.lainnya);
-                }, 1000);
+                }, 1500);
             });
         }
 
@@ -357,6 +395,73 @@
                         `);
                     }
                 }, 1000);
+            });
+        }
+
+        function fetchChart() {
+            $.getJSON("api/chart", function(data) {
+
+                var ctxGrafikAduan = document.getElementById("grafikAduan").getContext("2d");
+
+                var dataGrafikAduan = {
+                    labels: data.labels,
+                    datasets: [{
+                            label: "Keluhan",
+                            backgroundColor: "rgba(255, 99, 132, 0.3)",
+                            borderColor: "rgba(255,99,132,1)",
+                            data: data.data.keluhan,
+                            borderWidth: 1
+                        },
+                        {
+                            label: "Bukan Keluhan",
+                            backgroundColor: "rgba(75, 192, 192, 0.3)",
+                            borderColor: "rgba(75, 192, 192, 1)",
+                            data: data.data.bukan_keluhan,
+                            borderWidth: 1
+                        },
+                    ]
+                };
+
+                var grafikAduan = new Chart(ctxGrafikAduan, {
+                    type: 'bar',
+                    data: dataGrafikAduan,
+                    options: {
+                        barValueSpacing: 20,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                }
+                            }]
+                        },
+                        hover: {
+                            animationDuration: 0
+                        },
+                        animation: {
+                            duration: 3000,
+                            onComplete: function() {
+                                var chartInstance = this.chart,
+                                    ctx = chartInstance.ctx;
+
+                                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'bottom';
+
+                                this.data.datasets.forEach(function(dataset, i) {
+                                    var meta = chartInstance.controller.getDatasetMeta(i);
+                                    meta.data.forEach(function(bar, index) {
+                                        var data = dataset.data[index];
+                                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                    });
+                                });
+                            }
+                        },
+                        tooltips: {
+                            enabled: false
+                        },
+                    }
+                });
             });
         }
 
