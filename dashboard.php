@@ -153,7 +153,7 @@
                         <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask peach-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
-                                    <h5 class="card-title">Total Aduan Keluhan</h5>
+                                    <h5 class="card-title">Total Keluhan</h5>
                                     <h3 id="panelTotalAduanKeluhan" class="mb-0">
                                         <div class="preloader-wrapper small active">
                                             <div class="spinner-layer spinner-blue-only" style="border-color: white;">
@@ -196,7 +196,7 @@
                         <a href="#tabelAduan">
                             <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded">
                                 <div class="col-8 first-content align-self-center p-3">
-                                    <h5 class="card-title">Total Aduan Lainnya</h5>
+                                    <h5 class="card-title">Total Non Keluhan</h5>
                                     <h3 id="panelTotalAduanLainnya" class="mb-0">
                                         <div class="preloader-wrapper small active">
                                             <div class="spinner-layer spinner-blue-only" style="border-color: white;">
