@@ -9,7 +9,7 @@ switch ($request) {
     case '':
         require __DIR__ . '/dashboard.php';
         break;
-    case '/api/panel':
+    case (preg_match('/\/api\/panel.*/', $request) ? true : false):
         require __DIR__ . '/api/get-panel.php';
         break;
     case (preg_match('/\/api\/table.*/', $request) ? true : false):
@@ -18,10 +18,10 @@ switch ($request) {
     case (preg_match('/\/api\/chart.*/', $request) ? true : false):
         require __DIR__ . '/api/get-chart.php';
         break;
-    case '/api/category':
+    case (preg_match('/\/api\/category.*/', $request) ? true : false):
         require __DIR__ . '/api/get-category.php';
         break;
-    case '/api/category/update':
+    case (preg_match('/\/api\/category\/update.*/', $request) ? true : false):
         require __DIR__ . '/api/update-category.php';
         break;
     default:
