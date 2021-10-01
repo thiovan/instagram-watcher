@@ -18,11 +18,11 @@ switch ($request) {
     case (preg_match('/\/api\/chart.*/', $request) ? true : false):
         require __DIR__ . '/api/get-chart.php';
         break;
-    case (preg_match('/\/api\/category.*/', $request) ? true : false):
-        require __DIR__ . '/api/get-category.php';
-        break;
     case (preg_match('/\/api\/category\/update.*/', $request) ? true : false):
         require __DIR__ . '/api/update-category.php';
+        break;
+    case (preg_match('/\/api\/category.*/', $request) ? true : false):
+        require __DIR__ . '/api/get-category.php';
         break;
     default:
         http_response_code(404);
