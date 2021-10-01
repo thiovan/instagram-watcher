@@ -350,6 +350,10 @@
         //     $('#mdb-preloader').delay(1000).fadeOut(300);
         // });
 
+        $.ajaxSetup({
+            cache: false
+        });
+
         toastr.options = {
             positionClass: 'md-toast-bottom-right'
         };
