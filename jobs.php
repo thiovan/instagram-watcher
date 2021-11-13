@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/libs/rb-mysql.php';
+require __DIR__ . '/libs/EmailVerification.php';
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -44,6 +45,13 @@ try {
     $INFO_LOGGER = new Monolog\Logger('info');
     $INFO_LOGGER->pushHandler(new Monolog\Handler\RotatingFileHandler(__DIR__ . '/logs/info.log', 7, Monolog\Logger::DEBUG, true, 0664));
 
+    // init email verification
+    $emailVerification = new EmailVerification(
+        $_ENV['EMAIL_NAME'],
+        $_ENV['EMAIL_HOST'],
+        $_ENV['EMAIL_PASS']
+    );
+
     // init instagram scraper
     $INSTAGRAM = new \InstagramScraper\Instagram(new \GuzzleHttp\Client());
     $INSTAGRAM = \InstagramScraper\Instagram::withCredentials(
@@ -52,9 +60,7 @@ try {
         getConfig('INSTAGRAM_PASSWORD'),
         new Phpfastcache\Helper\Psr16Adapter('Files')
     );
-    $INSTAGRAM->setUserAgent('User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0');
-    $INSTAGRAM->login(false, true);
-    $INSTAGRAM->saveSession();
+    $INSTAGRAM->login(false, $emailVerification);
 
     function sendMessage($message)
     {
