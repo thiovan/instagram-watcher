@@ -83,7 +83,7 @@ class EmailVerification implements TwoStepVerificationInterface
             . $mail[0][strlen($mail[0]) - 1];
         $domain = explode('.', $mail[1]);
         $zone = array_pop($domain);
-        $domain = $domain[0][0] . \str_repeat('*', strlen(implode('.', $domain)) - 1);
+        $domain = $domain[0][0] . \str_repeat('*', min(strlen(implode('.', $domain)) - 1, 5));
         return $mail[0] . '@' . $domain . '.' . $zone;
     }
 
