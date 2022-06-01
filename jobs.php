@@ -61,6 +61,7 @@ try {
         new Phpfastcache\Helper\Psr16Adapter('Files')
     );
     $INSTAGRAM->login(false, $emailVerification);
+    $INSTAGRAM->saveSession(35791394);
 
     function sendMessage($message)
     {
