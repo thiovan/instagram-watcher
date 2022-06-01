@@ -87,9 +87,11 @@ try {
 
     foreach ($accounts as $account) {
         $medias = $INSTAGRAM->getMedias($account->username, getConfig('MAX_POST'));
+        sleep(1);
 
         foreach ($medias as $media) {
             $comments = $INSTAGRAM->getMediaCommentsByCode($media->getShortCode(), getConfig('MAX_COMMENT'));
+            sleep(1);
 
             foreach ($comments as $comment) {
 
